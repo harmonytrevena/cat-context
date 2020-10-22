@@ -1,31 +1,37 @@
 import React, { useReducer } from 'react';
 import { StateProvider } from "./context/index";
-import Demo from "./components/DemoComponent";
+import Cat from "./components/CatComponent";
 
 import './App.css';
 
 function App() {
   const initialState = {
-    name: "Harmony",
+    name: "Sunshine",
+    activity: "napping",
   };
 
-  const reducer = (state, action) => {
-    const { name } = action;
+  const catReducer = (state, action) => {
+    const { name, activity } = action;
     switch (action.type) {
       case "CHANGE_NAME":
         return {
           ...state,
-          name
+          name,
         };
-        default:
-          return state;
+      case "SET_ACTIVITY":
+        return {
+          ...state,
+          activity,
+        }
+      default:
+        return state;
     }
-  }
+  };
 
   return (
     <div className="App">
-      <StateProvider value={useReducer(reducer, initialState)}>
-        <Demo />
+      <StateProvider value={useReducer(catReducer, initialState)}>
+        <Cat />
       </StateProvider>
     </div>
   );
